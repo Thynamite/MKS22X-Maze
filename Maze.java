@@ -22,15 +22,32 @@ public class Maze{
       String mazey = "";
       Scanner s = new Scanner(filename);
       int rows = 0;
+      int cols = 0;
+      if (s.hasNextLine()) {
+        mazey += s.nextLine();
+        cols = mazey.length();
+      }
+      mazey+= '\n';
 
       while(s.hasNextLine()){
         mazey+= s.nextLine() + '\n';
         rows++;
-        
       }
 
+      if (mazey.contains)
+      maze = new char[rows][cols];
+      for ()
     }
 
+    private int count(String mazes, char E){
+      int total = 0;
+      for (int x = 0; x < mazes.length; x++) {
+        if (mazes.charAt(x) == E) {
+          total++;
+        }
+      }
+      return total;
+    }
     private void wait(int millis){
          try {
              Thread.sleep(millis);
