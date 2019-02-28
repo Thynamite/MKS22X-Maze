@@ -29,6 +29,7 @@ public class Maze{
       while(s.hasNextLine()){
         mazey+= s.nextLine() + '\n';
         rows++;
+        //System.out.println(mazey);
       }
       cols = mazey.length() / rows;
 
@@ -83,12 +84,9 @@ public class Maze{
       String mazey = "";
       for (int x = 0; x < maze.length; x++) {
         for (int y = 0; y < maze[x].length; y++){
-          if (y == maze[x].length -1) {
-            mazey += maze[x][y] + '\n';
-          }
-          else {
+
             mazey += maze[x][y];
-          }
+
         }
       }
       return mazey;
