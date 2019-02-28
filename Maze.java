@@ -99,8 +99,8 @@ public class Maze{
     */
     public int solve(){
             //find the location of the S.
-      int row;
-      int col;
+      int row = 0;
+      int col = 0;
       for (int x = 0; x < maze.length; x++){
         for (int y = 0; y < maze[x].length; y++) {
           if (maze[x][y] == 'S') {
@@ -111,6 +111,7 @@ public class Maze{
       }
 
             //erase the S
+      maze[row][col] = ' '; //might need to put this into recursion
 
             //and start solving at the location of the s.
             //return solve(???,???);
@@ -131,7 +132,10 @@ public class Maze{
         All visited spots that are part of the solution are changed to '@'
     */
     private int solve(int row, int col){ //you can add more parameters since this is private
+        int[] moves = {1,0,-1,0,0,1,0,-1};
+        for (int x = 0; x < moves.length; x+=2){
 
+        }
         //automatic animation! You are welcome.
         if(animate){
             clearTerminal();
@@ -143,6 +147,20 @@ public class Maze{
         return -1; //so it compiles
     }
 
+    private boolean place(int row, int col){
+      if (maze[row][col] != ' '){
+        return false;
+      }
+      maze[row][col] = '@';
+      return true;
+    }
+    private boolean remove(int row, int col){
+      if (maze[row][col] != '@'){
+        return false;
+      }
+      maze[row][col] = '.';
+      return true;
+    }
     private boolean check(int row, int col){
       char character = maze[row][col];
 
