@@ -133,23 +133,37 @@ public class Maze{
         All visited spots that are part of the solution are changed to '@'
     */
     private int solve(int row, int col){ //you can add more parameters since this is private
-        int[] moves = {1,0,-1,0,0,1,0,-1};
-        for (int x = 0; x < moves.length; x+=2){
-          if (check(row+ moves[x], col + moves[x+1])) {
-            if (place(row+moves[x],col+moves[x+1])){
-              solve(row+moves[x],col+moves[x+1]);
-            }
-            remove(row,col);
-          }
-        }
+
         //automatic animation! You are welcome.
         if(animate){
             clearTerminal();
             System.out.println(this);
-            wait(20);
+            wait(500);
         }
 
         //COMPLETE SOLVE
+        int[] moves = {1,0,0,1,-1,0,0,-1,};
+        if (maze[row][col] == 'E'){
+          int total = 0;
+          for (int x = 0; x<maze.length;x++){
+            for (int y = 0; y < maze[x].length; y++){
+              if (maze[x][y] == '@'){
+                total++;
+              }
+            }
+          }
+          return total;
+        }
+        else {
+          for (int x = 0; x < moves.length; x+=2){
+            if (check(row+ moves[x], col + moves[x+1])) {
+              if (place(row,col)){
+                return solve(row+moves[x],col+moves[x+1]);
+              }
+              remove(row,col);
+            }
+          }
+        }
         return -1; //so it compiles
     }
 
@@ -171,9 +185,9 @@ public class Maze{
       char character = maze[row][col];
 
       if (character == '#' || character == '.') {
-        return true;
+        return false;
       }
       //might need more later
-      return false;
+      return true;
     }
 }
