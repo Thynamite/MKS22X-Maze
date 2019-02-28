@@ -99,6 +99,16 @@ public class Maze{
     */
     public int solve(){
             //find the location of the S.
+      int row;
+      int col;
+      for (int x = 0; x < maze.length; x++){
+        for (int y = 0; y < maze[x].length; y++) {
+          if (maze[x][y] == 'S') {
+            row = x;
+            col = y;
+          }
+        }
+      }
 
             //erase the S
 
