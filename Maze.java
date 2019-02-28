@@ -34,7 +34,9 @@ public class Maze{
         rows++;
       }
 
-      if (mazey.contains)
+      if (count(mazey,'S') != 1 || count(mazey,'E') != 1) {
+        throw new IllegalStateException("missing or extra start and exit");
+      }
       maze = new char[rows][cols];
       for ()
     }
