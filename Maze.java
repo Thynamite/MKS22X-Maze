@@ -58,6 +58,7 @@ public class Maze{
       }
       return total;
     }
+
     private void wait(int millis){
          try {
              Thread.sleep(millis);
@@ -83,7 +84,18 @@ public class Maze{
      It should look like the text file with some characters replaced.
     */
     public String toString(){
-            return "WRITE THIS METHOD";
+      String mazey = "";
+      for (int x = 0; x < maze.length; x++) {
+        for (int y = 0; y < maze[x].length; y++){
+          if (y == maze[x].length -1) {
+            mazey += maze[x][y] + '\n';
+          }
+          else {
+            mazey += maze[x][y];
+          }
+        }
+      }
+      return mazey;
     }
 
 
@@ -98,6 +110,7 @@ public class Maze{
 
             //and start solving at the location of the s.
             //return solve(???,???);
+            return 0;
     }
 
     /*
