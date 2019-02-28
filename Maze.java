@@ -23,7 +23,9 @@ public class Maze{
       Scanner s = new Scanner(filename);
       int rows = 0;
       int cols = 0;
-      if (s.hasNextLine()) {
+      animate = false;
+
+      if (s.hasNextLine()) {  //see first line length but it also advances the scanner
         mazey += s.nextLine();
         cols = mazey.length();
       }
@@ -38,12 +40,18 @@ public class Maze{
         throw new IllegalStateException("missing or extra start and exit");
       }
       maze = new char[rows][cols];
-      for ()
+      int index = 0;
+      for (int x = 0; x < rows; x++) {
+        for (int y = 0; y < cols; y++) {
+          maze[x][y] = mazey.charAt(index);
+          index++;
+        }
+      }
     }
 
     private int count(String mazes, char E){
       int total = 0;
-      for (int x = 0; x < mazes.length; x++) {
+      for (int x = 0; x < mazes.length(); x++) {
         if (mazes.charAt(x) == E) {
           total++;
         }
