@@ -116,7 +116,7 @@ public class Maze{
             //and start solving at the location of the s.
             //return solve(???,???);
 
-      return solve(row,col);
+      return solve(row,col,0);
     }
 
     /*
@@ -132,37 +132,30 @@ public class Maze{
         All visited spots that were not part of the solution are changed to '.'
         All visited spots that are part of the solution are changed to '@'
     */
-    private int solve(int row, int col){ //you can add more parameters since this is private
+    private int solve(int row, int col,int tots){ //you can add more parameters since this is private
 
         //automatic animation! You are welcome.
         if(animate){
             clearTerminal();
             System.out.println(this);
-            wait(500);
+            wait(50);
         }
 
         //COMPLETE SOLVE
-        int[] moves = {1,0,0,1,-1,0,0,-1,};
+        int[] moves = {1,0,0,1,-1,0,0,-1};
         if (maze[row][col] == 'E'){
-          int total = 0;
-          for (int x = 0; x<maze.length;x++){
-            for (int y = 0; y < maze[x].length; y++){
-              if (maze[x][y] == '@'){
-                total++;
-              }
-            }
-          }
-          return total;
+          return tots;
         }
         else {
           for (int x = 0; x < moves.length; x+=2){
-            if (check(row+ moves[x], col + moves[x+1])) {
-              if (place(row,col)){
-                return solve(row+moves[x],col+moves[x+1]);
+            if(place(row,col)){
+              if (solve(row+moves[x],col+moves[x+1],tots+1) != -1){
+                return solve(row+moves[x],col+moves[x+1],tots+1);
               }
-              remove(row,col);
             }
+            remove(row,col);
           }
+
         }
         return -1; //so it compiles
     }
@@ -178,7 +171,7 @@ public class Maze{
       if (maze[row][col] != '@'){
         return false;
       }
-      maze[row][col] = '.';
+      maze[row][col] = ' ';
       return true;
     }
     private boolean check(int row, int col){
