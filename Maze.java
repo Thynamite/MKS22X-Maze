@@ -133,4 +133,13 @@ public class Maze{
         return -1; //so it compiles
     }
 
+    private boolean check(int row, int col){
+      char character = maze[row][col];
+
+      if (character == '#' || character == '.') {
+        return true;
+      }
+      //might need more later
+      return false;
+    }
 }
