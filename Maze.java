@@ -115,7 +115,8 @@ public class Maze{
 
             //and start solving at the location of the s.
             //return solve(???,???);
-            return 0;
+
+      return solve(row,col);
     }
 
     /*
@@ -134,7 +135,12 @@ public class Maze{
     private int solve(int row, int col){ //you can add more parameters since this is private
         int[] moves = {1,0,-1,0,0,1,0,-1};
         for (int x = 0; x < moves.length; x+=2){
-
+          if (check(row+ moves[x], col + moves[x+1])) {
+            if (place(row+moves[x],col+moves[x+1])){
+              solve(row+moves[x],col+moves[x+1]);
+            }
+            remove(row,col);
+          }
         }
         //automatic animation! You are welcome.
         if(animate){
