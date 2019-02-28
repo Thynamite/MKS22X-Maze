@@ -20,21 +20,17 @@ public class Maze{
     */
     public Maze(String filename) throws FileNotFoundException{
       String mazey = "";
-      Scanner s = new Scanner(filename);
+      File f = new File(filename);
       int rows = 0;
       int cols = 0;
       animate = false;
-
-      if (s.hasNextLine()) {  //see first line length but it also advances the scanner
-        mazey += s.nextLine();
-        cols = mazey.length();
-      }
-      mazey+= '\n';
+      Scanner s = new Scanner(f);
 
       while(s.hasNextLine()){
         mazey+= s.nextLine() + '\n';
         rows++;
       }
+      cols = mazey.length() / rows;
 
       if (count(mazey,'S') != 1 || count(mazey,'E') != 1) {
         throw new IllegalStateException("missing or extra start and exit");
