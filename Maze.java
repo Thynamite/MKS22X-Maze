@@ -99,24 +99,24 @@ public class Maze{
     */
     public int solve(){
             //find the location of the S.
-      int row = 0;
-      int col = 0;
+      int rows = 0;
+      int cols = 0;
       for (int x = 0; x < maze.length; x++){
         for (int y = 0; y < maze[x].length; y++) {
           if (maze[x][y] == 'S') {
-            row = x;
-            col = y;
+            rows = x;
+            cols = y;
           }
         }
       }
 
             //erase the S
-      maze[row][col] = ' '; //might need to put this into recursion
+      maze[rows][cols] = ' '; //might need to put this into recursion
 
             //and start solving at the location of the s.
             //return solve(???,???);
 
-      return solve(row,col,0);
+      return solve(rows,cols);
     }
 
     /*
@@ -132,33 +132,44 @@ public class Maze{
         All visited spots that were not part of the solution are changed to '.'
         All visited spots that are part of the solution are changed to '@'
     */
-    private int solve(int row, int col,int tots){ //you can add more parameters since this is private
+
+    private int solve(int row, int col){ //you can add more parameters since this is private
 
         //automatic animation! You are welcome.
         if(animate){
             clearTerminal();
             System.out.println(this);
-            wait(50);
+            wait(5);
         }
 
         //COMPLETE SOLVE
         int[] moves = {1,0,0,1,-1,0,0,-1};
+        int tots = -1;
         if (maze[row][col] == 'E'){
+          tots = 0;
+          for (int x = 0; x < maze.length; x ++){
+            for (int y=0; y<maze[x].length;y++){
+              if (maze[x][y] == '@') {
+                tots++;
+              }
+            }
+          }
           return tots;
         }
         else {
           for (int x = 0; x < moves.length; x+=2){
             if(place(row,col)){
-              if (solve(row+moves[x],col+moves[x+1],tots+1) != -1){
-                return solve(row+moves[x],col+moves[x+1],tots+1);
-              }
+              if (solve(row+moves[x],col+moves[x+1]) != -1){
             }
             remove(row,col);
-          }
 
+          }
+          maze[row][col] = '.';
         }
-        return -1; //so it compiles
+        }
+        return tots; //so it compiles
     }
+
 
     private boolean place(int row, int col){
       if (maze[row][col] != ' '){
@@ -168,7 +179,7 @@ public class Maze{
       return true;
     }
     private boolean remove(int row, int col){
-      if (maze[row][col] != '@'){
+      if (maze[row][col] != '@' ){
         return false;
       }
       maze[row][col] = ' ';
