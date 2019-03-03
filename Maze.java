@@ -111,7 +111,7 @@ public class Maze{
       }
 
             //erase the S
-      maze[rows][cols] = ' '; //might need to put this into recursion
+      maze[rows][cols] = '@'; //might need to put this into recursion
 
             //and start solving at the location of the s.
             //return solve(???,???);
@@ -145,25 +145,19 @@ public class Maze{
         //COMPLETE SOLVE
         int[] moves = {1,0,0,1,-1,0,0,-1};
         int tots = -1;
-        if (maze[row][col] == 'E'){
-          tots = 0;
-          for (int x = 0; x < maze.length; x ++){
-            for (int y=0; y<maze[x].length;y++){
-              if (maze[x][y] == '@') {
-                tots++;
-              }
+        for (int x = 0; x < moves.length; x+=2){
+          if(maze[row+moves[x]][col+moves[x+1]] == 'E'{
+            return 1;
+          }
+          if (solve(row+moves[x],col+moves[x+1])){
+            tots = solve(row+moves[x],col+moves[x+1]);
+            if (tots != -1) {
+              return tots++;
             }
           }
-          return tots;
-        }
-        else {
-          for (int x = 0; x < moves.length; x+=2){
-            if(place(row,col)){
-              if (solve(row+moves[x],col+moves[x+1]) != -1){
-            }
             remove(row,col);
 
-          }
+        }
           maze[row][col] = '.';
         }
         }
