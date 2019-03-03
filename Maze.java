@@ -154,10 +154,11 @@ public class Maze{
             if (tots != -1) {
               return tots++;
             }
+            else {
+              remove(row+moves[x],col+moves[x+1]);
+            }
           }
-          else {
-            remove(row,col);
-          }
+
         }
         return tots; //so it compiles
     }
