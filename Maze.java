@@ -146,20 +146,18 @@ public class Maze{
         int[] moves = {1,0,0,1,-1,0,0,-1};
         int tots = -1;
         for (int x = 0; x < moves.length; x+=2){
-          if(maze[row+moves[x]][col+moves[x+1]] == 'E'{
+          if(maze[row+moves[x]][col+moves[x+1]] == 'E'){
             return 1;
           }
-          if (solve(row+moves[x],col+moves[x+1])){
+          if (place(row+moves[x],col+moves[x+1])){
             tots = solve(row+moves[x],col+moves[x+1]);
             if (tots != -1) {
               return tots++;
             }
           }
+          else {
             remove(row,col);
-
-        }
-          maze[row][col] = '.';
-        }
+          }
         }
         return tots; //so it compiles
     }
@@ -176,7 +174,7 @@ public class Maze{
       if (maze[row][col] != '@' ){
         return false;
       }
-      maze[row][col] = ' ';
+      maze[row][col] = '.';
       return true;
     }
     private boolean check(int row, int col){
