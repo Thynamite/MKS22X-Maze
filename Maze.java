@@ -139,7 +139,7 @@ public class Maze{
         if(animate){
             clearTerminal();
             System.out.println(this);
-            wait(5);
+            wait(50);
         }
 
         //COMPLETE SOLVE
@@ -147,7 +147,15 @@ public class Maze{
         int tots = -1;
         for (int x = 0; x < moves.length; x+=2){
           if(maze[row+moves[x]][col+moves[x+1]] == 'E'){
-            return 1;
+            tots = 0;
+            for (int r = 0; r < maze.length; r++) {
+              for (int c = 0; c < maze[r].length; c++) {
+                if (maze[r][c] == '@') {
+                  tots++;
+                }
+              }
+            }
+            return tots;
           }
           if (place(row+moves[x],col+moves[x+1])){
             tots = solve(row+moves[x],col+moves[x+1]);
